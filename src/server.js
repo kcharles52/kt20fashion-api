@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import config from './config'
 import cors from 'cors'
 import { connect } from './utils/db'
+import { signup, signin, protect } from './utils/auth'
 
 export const app = express()
 
@@ -14,6 +15,12 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
+
+app.post('/signup', signup)
+app.post('/signin', signin)
+
+// protect the reset of the routes
+app.use('/api', protect)
 
 app.get('/api/data', (req, res) => {
   res.json({ message: 'initial setup' })

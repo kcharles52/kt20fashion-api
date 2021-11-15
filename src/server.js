@@ -22,15 +22,6 @@ app.post('/signin', signin)
 // protect the reset of the routes
 app.use('/api', protect)
 
-app.get('/api/data', (req, res) => {
-  res.json({ message: 'initial setup' })
-})
-
-app.post('/api/data', (req, res) => {
-  console.log(req.body)
-  res.status(200).end()
-})
-
 export const start = async () => {
   try {
     await connect()
